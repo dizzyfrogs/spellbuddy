@@ -1,5 +1,5 @@
-from src.bktree import BKTree
-from src.edit_distance import edit_distance
+from spellbuddy.bktree import BKTree
+from spellbuddy.edit_distance import edit_distance
 
 class SpellingSuggester:
     def __init__(self, word_list):
