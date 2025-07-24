@@ -23,3 +23,27 @@ class BKTree:
             else:
                 curr.children[dist] = BKTreeNode(word)
                 break
+
+    def search(self, word, tolerance):
+        """
+        Search for all words within tolerance distance of the given word
+        Returns a list of tuples: (matching_word, distance).
+        """
+
+        results = []
+
+        def dfs(node):
+            dist = self.distance_func(word, node.word)
+            if dist <= tolerance:
+                results.append((node.word, dist))
+
+            # explore eligible child nodes
+            for d in range(dist - tolerance, dist + tolerance + 1):
+                child = node.children.get(d)
+                if child is not None:
+                    dfs(child)
+
+        if self.root is not None:
+            dfs(self.root)
+            
+        return sorted(results, key=lambda x: x[1])
